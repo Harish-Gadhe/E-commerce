@@ -24,11 +24,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PutMapping;
 import java.io.IOException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+@CrossOrigin(
+    origins = {
+        "http://localhost:5173",
+        "http://localhost:8080"
+    },
+    allowedHeaders = "*",
+    methods = {
+        RequestMethod.GET,
+        RequestMethod.POST,
+        RequestMethod.PUT,
+        RequestMethod.DELETE
+    }
+)
 
-
-
-@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class productController {
@@ -53,7 +64,7 @@ public class productController {
         return new ResponseEntity<> (HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/product")
+    @PostMapping("/products")
     public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile) {
        
         try {
